@@ -1,58 +1,54 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import { TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-export const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
+import { TextInput } from "react-native";
 
-    paddingHorizontal: 12,
-    marginTop: -27,
-  },
-  taskDescription: {
-    flex: 1,
-    height: 52,
-    padding: 16,
-    borderRadius: 6,
-    backgroundColor: "#262626",
-    color: "#F2F2F2",
-  },
+export const Container = styled.View`
+  flex-direction: row;
 
-  btnAdd: {
-    height: 52,
-    width: 52,
-    borderRadius: 6,
-    backgroundColor: "#1E6F9F",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 4,
-  },
-  containerTasks: {
-    paddingHorizontal: 12,
-  },
-  headerTasks: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 32,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#333333",
-    borderStyle: "solid",
-  },
-  statusTasks: {
-    flexDirection: "row",
-  },
+  padding: 0 12px;
+  margin-top: -27px;
+`;
 
-  titleStatusTasks: {
-    color: "#4EA8DE",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  count: {
-    height: 19,
-    width: 25,
-    borderRadius: 999,
-    backgroundColor: "#333333",
-    marginLeft: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export const Input = styled(TextInput)`
+  flex: 1;
+  height: 52px;
+  padding: 16px;
+  border-radius: 6px;
+  background-color: #262626;
+  color: #f2f2f2;
+`;
+
+export const BtnAdd = styled(TouchableOpacity)`
+  height: 52px;
+  width: 52px;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.COLORS.BLUE_DARK};
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+`;
+
+export const ContainerTasks = styled.View`
+  padding: 0 12px;
+`;
+export const HeaderTasks = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-top: 32px;
+  padding-bottom: 20px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${({ theme }) => theme.COLORS.GRAY_400};
+  border-style: solid;
+`;
+
+export const ContainerTaskStatus = styled.View`
+  flex-direction: row;
+`;
+
+export const Icon = styled(Ionicons).attrs(({ theme }) => ({
+  color: theme.COLORS.WHITE,
+  size: 24,
+}))``;

@@ -1,14 +1,20 @@
+import { FlatList, View } from "react-native";
+
 import {
-  FlatList,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { styles } from "./styles";
+  BtnAdd,
+  Container,
+  ContainerTasks,
+  ContainerTaskStatus,
+  HeaderTasks,
+  Icon,
+  Input,
+} from "./styles";
 import { Task } from "../Task";
 import { useState } from "react";
+import { useTheme } from "styled-components/native";
+import { CountNumber } from "../CountNumber";
+import { TitleStatusText } from "../TitleStatusText";
+import theme from "../../theme";
 
 interface Task {
   name: string;
@@ -45,35 +51,36 @@ export function Tasks() {
     setTasks(tasksUpdate);
   }
 
+  const { COLORS } = useTheme();
+
   return (
     <View>
-      <View style={styles.container}>
-        <TextInput
-          style={styles.taskDescription}
+      <Container>
+        <Input
           onChangeText={(text) => setNewTaskName(text)}
           value={newTaskName}
         />
-        <TouchableOpacity style={styles.btnAdd} onPress={handleAddTask}>
-          <Ionicons name="add-circle-outline" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.containerTasks}>
-        <View style={styles.headerTasks}>
-          <View style={styles.statusTasks}>
-            <Text style={styles.titleStatusTasks}>Criadas</Text>
-            <View style={styles.count}>
-              <Text style={{ color: "white" }}>{tasksCreated}</Text>
-            </View>
-          </View>
-          <View style={styles.statusTasks}>
-            <Text style={[styles.titleStatusTasks, { color: "#8284FA" }]}>
-              Concluídas
-            </Text>
-            <View style={styles.count}>
-              <Text style={{ color: "white" }}>{tasksDone.length}</Text>
-            </View>
-          </View>
-        </View>
+        <BtnAdd onPress={handleAddTask}>
+          <Icon name="add-circle-outline" />
+        </BtnAdd>
+      </Container>
+      <ContainerTasks>
+        <HeaderTasks>
+          <ContainerTaskStatus>
+            <TitleStatusText
+              title="Criadas"
+              style={{ color: theme.COLORS.BLUE }}
+            />
+            <CountNumber amountTask={tasks.length} />
+          </ContainerTaskStatus>
+          <ContainerTaskStatus>
+            <TitleStatusText
+              title="Concluídas"
+              style={{ color: theme.COLORS.PURPLE }}
+            />
+            <CountNumber amountTask={tasksDone.length} />
+          </ContainerTaskStatus>
+        </HeaderTasks>
         <FlatList
           data={tasks}
           keyExtractor={(item) => item.name}
@@ -89,7 +96,7 @@ export function Tasks() {
             />
           )}
         />
-      </View>
+      </ContainerTasks>
     </View>
   );
 }
